@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Environment | IoT Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark">SE</div>
+        <div>
+          <h1>Smart Environment</h1>
+          <p>IoT Air Quality Monitoring System</p>
+        </div>
+      </div>
+      <div class="connection-pill">
+        <span class="pulse"></span>
+        <span id="connectionText">Cloud monitoring</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <p class="eyebrow">REAL-TIME ENVIRONMENTAL INTELLIGENCE</p>
+          <h2>Monitor your environment at a glance.</h2>
+          <p class="hero-copy">
+            Live sensor data from ESP32 → ThingSpeak Cloud → Web Dashboard.
+          </p>
+        </div>
+        <div class="last-update">
+          <span>LAST UPDATE</span>
+          <strong id="lastUpdate">Waiting for data...</strong>
+        </div>
+      </section>
+
+      <section class="metric-grid">
+        <article class="metric-card temperature">
+          <div class="metric-head"><span class="icon">°C</span><span>Temperature</span></div>
+          <div class="metric-value"><span id="temperature">--</span><small>°C</small></div>
+          <div class="metric-note">Ambient temperature</div>
+        </article>
+
+        <article class="metric-card humidity">
+          <div class="metric-head"><span class="icon">%</span><span>Humidity</span></div>
+          <div class="metric-value"><span id="humidity">--</span><small>%</small></div>
+          <div class="metric-note">Relative humidity</div>
+        </article>
+
+        <article class="metric-card gas">
+          <div class="metric-head"><span class="icon">G</span><span>Gas Sensor</span></div>
+          <div class="metric-value"><span id="gas">--</span><small>ADC</small></div>
+          <div class="metric-note">ESP32 analog reading</div>
+        </article>
+
+        <article class="metric-card aqi">
+          <div class="metric-head"><span class="icon">AQ</span><span>AQI Indicator</span></div>
+          <div class="metric-value"><span id="aqi">--</span><small>/ 500</small></div>
+          <div id="aqiStatus" class="status-badge">Awaiting data</div>
+        </article>
+      </section>
+
+      <section class="status-row">
+        <div class="system-card">
+          <div class="system-title">System status</div>
+          <div class="status-items">
+            <span><i class="dot online"></i> ESP32 data</span>
+            <span><i class="dot online"></i> ThingSpeak cloud</span>
+            <span><i class="dot online"></i> Dashboard</span>
+          </div>
+        </div>
+        <div class="system-card threshold-card">
+          <div>
+            <div class="system-title">Alert threshold</div>
+            <p>AQI indicator alert at <strong>150+</strong></p>
+          </div>
+          <div id="alertState" class="alert-state">Normal</div>
+        </div>
+      </section>
+
+      <section class="charts-grid">
+        <article class="chart-card wide">
+          <div class="chart-title">
+            <div><h3>Environmental trends</h3><p>Temperature and humidity over recent readings</p></div>
+          </div>
+          <div class="chart-wrap"><canvas id="environmentChart"></canvas></div>
+        </article>
+
+        <article class="chart-card">
+          <div class="chart-title">
+            <div><h3>Gas sensor</h3><p>Recent analog readings</p></div>
+          </div>
+          <div class="chart-wrap"><canvas id="gasChart"></canvas></div>
+        </article>
+
+        <article class="chart-card">
+          <div class="chart-title">
+            <div><h3>AQI indicator</h3><p>Recent calculated indicator</p></div>
+          </div>
+          <div class="chart-wrap"><canvas id="aqiChart"></canvas></div>
+        </article>
+      </section>
+
+      <section class="about-card">
+        <div>
+          <p class="eyebrow">PROJECT ARCHITECTURE</p>
+          <h3>Sensor → ESP32 → Wi-Fi → ThingSpeak → Dashboard</h3>
+          <p>
+            DHT22 measures temperature and humidity. The simulated gas sensor
+            provides an analog value. ESP32 processes the readings, drives the
+            OLED and alert LED, and uploads four fields to ThingSpeak.
+          </p>
+        </div>
+        <div class="architecture">
+          <span>🌡️ DHT22</span><b>→</b><span>ESP32</span><b>→</b><span>☁ ThingSpeak</span><b>→</b><span>📊 Web UI</span>
+        </div>
+      </section>
+
+      <footer>
+        <span>Smart Environment & AQI Monitoring System</span>
+        <span>Academic Prototype • IoT Demonstration</span>
+      </footer>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
