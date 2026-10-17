@@ -26,6 +26,9 @@ A professional front-end dashboard for the Smart Environment & AQI Monitoring Sy
 Run the ESP32/Wokwi simulation first so ThingSpeak receives readings.
 Then open the dashboard. It refreshes every 20 seconds.
 
+Wokwi: https://wokwi.com/projects/475347579030088705
+Dashboard: https://reyan-khan1811.github.io/smart-environment-dashboard/
+
 ## Important
 
 The displayed AQI is the project's educational indicator derived from the simulated gas-sensor analog reading. It is not a calibrated regulatory AQI measurement.
